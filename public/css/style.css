@@ -22,3 +22,30 @@ footer> .container, footer .row{
     text-align: center;
     margin-bottom: 20px;
 }
+
+.card-block{
+    padding: 15px;
+}
+
+.w30{
+    width: 30%;
+}
+.w20{
+    width: 20%;
+}
+.w10{
+    width: 10%;
+}
+.w5{
+    width: 5%;
+}
+.articles{
+    margin-top: 15px;
+}
+
+.article-inline{
+    padding-left: 10px;
+}
+.article-inline:nth-of-type(odd){
+    background: rgba(0, 0, 0, 0.05);
+}
