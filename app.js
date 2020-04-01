@@ -2,9 +2,12 @@ let express = require('express');
 let app = express();
 let mongoose = require('mongoose');
 let Post = require('./models/posts').Post;
+let multer = require('multer'); //multer allows to read binary-data (this is DATA-type, and not only JSON)
 
 mongoose.connect('mongodb://localhost/travels', {userNewUrlParser: true});
 app.use(express.json()); //converts the data from Post01 to JSON format
+app.use(multer().single('imageFile')); // imageFile is the name given for the key of the POST:body:data-object
+
 let id = 1;
 
 //server request to the DB - Back End
@@ -28,7 +31,8 @@ app.post('/posts', async (req, resp) => {
         country: reqBody.country,
         imageURL: reqBody.imageUrl
     })
-    await newPost.save();
+    console.log(newPost);
+    //await newPost.save();
     resp.send('Created');
 })
 
