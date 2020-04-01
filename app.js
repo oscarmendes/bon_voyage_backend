@@ -6,7 +6,11 @@ let multer = require('multer'); //multer allows to read binary-data (this is DAT
 
 mongoose.connect('mongodb://localhost/travels', {userNewUrlParser: true});
 app.use(express.json()); //converts the data from Post01 to JSON format
-app.use(multer().single('imageFile')); // imageFile is the name given for the key of the POST:body:data-object
+let imageStorage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, 'public/images'),  //Allows the storage of data-type image in images folder, under the same name
+    filename: (req, file, cb) => cb(null, file.originalname)
+})
+app.use(multer({storage: imageStorage}).single('imageFile')); // imageFile is the name given for the key of the POST:body:data-object
 
 let id = 1;
 
@@ -31,7 +35,7 @@ app.post('/posts', async (req, resp) => {
         country: reqBody.country,
         imageURL: reqBody.imageUrl
     })
-    console.log(newPost);
+    console.log(req.file);
     //await newPost.save();
     resp.send('Created');
 })
