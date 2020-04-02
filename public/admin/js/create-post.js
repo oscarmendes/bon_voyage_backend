@@ -23,3 +23,14 @@ createForm.addEventListener('submit', function(e) {
         body: data
     }).then((response) => response.text()).then((data) => window.history.go()); //window.history.go auto-refresh admin page when new content is added.
 })
+
+function disableInput(input1, input2){
+    if(input1.value){
+        input2.disabled = true;
+    }else{
+        input2.disabled = false;
+    }
+}
+
+createImageUrl.addEventListener('change', function() {disableInput(this, createImageFile)});
+createImageFile.addEventListener('change', function() {disableInput(this, createImageUrl)});
